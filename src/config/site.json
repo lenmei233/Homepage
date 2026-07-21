@@ -1,0 +1,21 @@
+{
+  "title": "lenmei233's 主页",
+  "description": "A person who loves coding.",
+  "author": "lenmei233",
+  "avatar": "/images/avatar.webp",
+  "nav": [
+    { "label": "Home", "path": "/", "icon": "home" },
+    { "label": "Projects", "path": "/projects", "icon": "code" },
+    { "label": "Tech Stack", "path": "/tech-stack", "icon": "cpu" },
+    { "label": "Blog", "path": "https://blog.lenmei233.top", "icon": "book-open", "external": true },
+    { "label": "Friends", "path": "/friends", "icon": "link" },
+    { "label": "About", "path": "/about", "icon": "user" }
+  ],
+  "social": [
+    { "name": "GitHub", "url": "https://github.com/lenmei233", "icon": "github" }
+  ],
+  "settings": {
+    "defaultBg": "/images/mountains.webp",
+    "defaultBlur": 4
+  }
+}

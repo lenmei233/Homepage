@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import App from '../App';
+---
+
+<BaseLayout title="Settings" description="Site settings">
+  <App client:only="react" />
+</BaseLayout>

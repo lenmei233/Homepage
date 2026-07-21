@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Qomicex Launcher",
+    "description": "一个现代化的 Minecraft 启动器",
+    "tags": ["Launcher","React", "TypeScript","C#","Rust"],
+    "url": "https://github.com/Qomicex-Public/Qomicex.Tauri",
+    "image": "/images/qml.png"
+  },
+  {
+    "title": "lenmei233's 个人主页",
+    "description": "本主页的源代码,已开源",
+    "tags": ["Astro", "CSS"],
+    "url": "https://github.com/lenmei233/Homepage",
+    "image": "/images/avatar.webp"
+  }
+]
