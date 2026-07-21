@@ -28,8 +28,11 @@ export default function TechStack() {
             <h2 className="text-lg font-semibold mb-3 text-muted">{cat.name}</h2>
             <div className="flex flex-wrap gap-3">
               {cat.items.map(item => (
-                <GlassCard key={item.name} class="!p-4">
-                  <span className="text-sm">{item.name}</span>
+                <GlassCard key={item.name} class="!p-3">
+                  <div className="flex items-center gap-2">
+                    {item.icon && <img src={`https://cdn.simple-icons.org/${item.icon}`} alt={item.name} className="w-5 h-5" loading="lazy" />}
+                    <span className="text-sm">{item.name}</span>
+                  </div>
                 </GlassCard>
               ))}
             </div>
