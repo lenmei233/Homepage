@@ -3,8 +3,27 @@ import GlassCard from '../components/GlassCard';
 import techStack from '../config/tech-stack.json';
 import en from '../i18n/en.json';
 import zh from '../i18n/zh.json';
+import * as simpleIcons from 'simple-icons';
 
 const messages: Record<string, Record<string, string>> = { en, zh };
+
+// slug -> simple-icons constant name 映射
+const slugToConstant: Record<string, string> = {
+  react: 'SiReact',
+  typescript: 'SiTypescript',
+  astro: 'SiAstro',
+  nodejs: 'SiNodedotjs',
+  python: 'SiPython',
+  git: 'SiGit',
+  docker: 'SiDocker',
+};
+
+function getIcon(slug: string) {
+  const constant = slugToConstant[slug];
+  if (!constant) return null;
+  const icon = (simpleIcons as Record<string, { path: string; title: string }>)[constant];
+  return icon || null;
+}
 
 export default function TechStack() {
   const [lang, setLang] = useState(() => {
@@ -27,14 +46,21 @@ export default function TechStack() {
           <div key={cat.name}>
             <h2 className="text-lg font-semibold mb-3 text-muted">{cat.name}</h2>
             <div className="flex flex-wrap gap-3">
-              {cat.items.map(item => (
-                <GlassCard key={item.name} class="!p-3">
-                  <div className="flex items-center gap-2">
-                    {item.icon && <img src={`https://cdn.simple-icons.org/${item.icon}`} alt={item.name} className="w-5 h-5" loading="lazy" />}
-                    <span className="text-sm">{item.name}</span>
-                  </div>
-                </GlassCard>
-              ))}
+              {cat.items.map(item => {
+                const icon = item.icon ? getIcon(item.icon) : null;
+                return (
+                  <GlassCard key={item.name} class="!p-3">
+                    <div className="flex items-center gap-2">
+                      {icon && (
+                        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+                          <path d={icon.path} />
+                        </svg>
+                      )}
+                      <span className="text-sm">{item.name}</span>
+                    </div>
+                  </GlassCard>
+                );
+              })}
             </div>
           </div>
         ))}
