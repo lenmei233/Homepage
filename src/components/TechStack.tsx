@@ -9,13 +9,13 @@ const messages: Record<string, Record<string, string>> = { en, zh };
 
 // slug -> simple-icons constant name 映射
 const slugToConstant: Record<string, string> = {
-  react: 'SiReact',
-  typescript: 'SiTypescript',
-  astro: 'SiAstro',
-  nodejs: 'SiNodedotjs',
-  python: 'SiPython',
-  git: 'SiGit',
-  docker: 'SiDocker',
+  react: 'siReact',
+  typescript: 'siTypescript',
+  astro: 'siAstro',
+  nodejs: 'siNodedotjs',
+  python: 'siPython',
+  git: 'siGit',
+  docker: 'siDocker',
 };
 
 function getIcon(slug: string) {
