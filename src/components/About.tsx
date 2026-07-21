@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { GitHubCalendar } from 'react-github-calendar';
 import GlassCard from '../components/GlassCard';
 import about from '../config/about.json';
 import en from '../i18n/en.json';
@@ -26,16 +27,10 @@ export default function About() {
         <div className="leading-relaxed text-sm whitespace-pre-wrap">{about.bio}</div>
       </GlassCard>
       <div className="page-section">
-        <h2 className="text-xl font-semibold mb-4">{t('about.timeline')}</h2>
-        <div className="relative pl-6 border-l-2 border-white/10">
-          {about.timeline.map(t => (
-            <div key={t.year} className="mb-5 relative">
-              <div className="absolute -left-[29px] top-1 w-3 h-3 rounded-full bg-accent border-2 border-black/40" />
-              <div className="text-sm font-semibold text-accent">{t.year}</div>
-              <div className="text-sm">{t.event}</div>
-            </div>
-          ))}
-        </div>
+        <h2 className="text-xl font-semibold mb-4">{t('about.contributions')}</h2>
+        <GlassCard class="!p-4 overflow-x-auto">
+          <GitHubCalendar username={about.githubUsername} colorScheme="dark" fontSize={12} />
+        </GlassCard>
       </div>
     </>
   );

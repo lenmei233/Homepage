@@ -138,9 +138,7 @@ public/
 ```json
 {
   "bio": "个人简介文字",
-  "timeline": [
-    { "year": "2024", "event": "发生了什么" }
-  ]
+  "githubUsername": "your-github-username"
 }
 ```
 
