@@ -8,6 +8,7 @@
 - **样式**: Tailwind CSS v4
 - **路由**: React Router v7 (SPA 模式)
 - **构建**: Vite
+- **分析**: Vercel Web Analytics
 
 ## 快速开始
 
