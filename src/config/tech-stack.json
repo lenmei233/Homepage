@@ -3,23 +3,53 @@
     {
       "name": "Frontend",
       "items": [
-        { "name": "React", "icon": "react" },
+        { "name": "HTML5", "icon": "html5" },
+        { "name": "JavaScript", "icon": "javascript" },
+        { "name": "CSS", "icon": "css" },
         { "name": "TypeScript", "icon": "typescript" },
-        { "name": "Astro", "icon": "astro" }
+        { "name": "React", "icon": "react" },
+        { "name": "Astro", "icon": "astro" },
+        { "name": "Tailwind CSS", "icon": "tailwindcss" },
+        { "name": "Simple Icons", "icon": "simpleicons" }
       ]
     },
     {
-      "name": "Backend",
+      "name": "Desktop",
       "items": [
-        { "name": "Node.js", "icon": "nodejs" },
-        { "name": "Python", "icon": "python" }
+        { "name": ".NET", "icon": "dotnet" },
+        { "name": "Avalonia UI", "icon": "avaloniaui" },
+        { "name": "Tauri", "icon": "tauri" }
       ]
     },
     {
-      "name": "Tools",
+      "name": "IDE & Editor",
       "items": [
-        { "name": "Git", "icon": "git" },
-        { "name": "Docker", "icon": "docker" }
+        { "name": "Rider", "icon": "rider" },
+        { "name": "Android Studio", "icon": "androidstudio" },
+        { "name": "OBS Studio", "icon": "obsstudio" }
+      ]
+    },
+    {
+      "name": "Cloud & Deploy",
+      "items": [
+        { "name": "Vercel", "icon": "vercel" },
+        { "name": "Cloudflare", "icon": "cloudflare" },
+        { "name": "Cloudflare Workers", "icon": "cloudflareworkers" },
+        { "name": "Cloudflare Pages", "icon": "cloudflarepages" }
+      ]
+    },
+    {
+      "name": "AI Tools",
+      "items": [
+        { "name": "OpenCode", "icon": "opencode" },
+        { "name": "Claude Code", "icon": "claudecode" }
+      ]
+    },
+    {
+      "name": "Package Manager",
+      "items": [
+        { "name": "npm", "icon": "npm" },
+        { "name": "pnpm", "icon": "pnpm" }
       ]
     }
   ]
