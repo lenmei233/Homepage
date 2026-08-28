@@ -8,6 +8,7 @@
     { "label": "Projects", "path": "/projects", "icon": "code" },
     { "label": "Tech Stack", "path": "/tech-stack", "icon": "cpu" },
     { "label": "Blog", "path": "https://blog.lenmei233.top", "icon": "book-open", "external": true },
+    { "label": "Tools", "path": "/tools", "icon": "wrench" },
     { "label": "Friends", "path": "/friends", "icon": "link" },
     { "label": "About", "path": "/about", "icon": "user" }
   ],
