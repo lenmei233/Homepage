@@ -1,3 +1,4 @@
 [
-  { "id": "domain-price", "icon": "globe" }
+  { "id": "domain-price", "icon": "globe" },
+  { "id": "nbt-editor", "icon": "box" }
 ]

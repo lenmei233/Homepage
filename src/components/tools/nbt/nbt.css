@@ -1,0 +1,675 @@
+/*
+  Path: src/components/tools/nbt/nbt.css
+
+  The tool's theme layer.
+
+  The original editor shipped its own dark palette (`surface-0/1/2`, `hairline`,
+  `ink*`, `danger-bg`). None of those tokens exist on this site, so instead of
+  duplicating them everything here reads the site's variables — glass borders,
+  muted ink, and above all `--color-accent`, which the user can change in
+  Settings. Badges, focus rings, the dropzone wash and the primary button all
+  follow whatever accent is active, so the tool looks native in every theme.
+
+  Scope: every selector is prefixed `.nbt-`, so nothing leaks into the rest of
+  the site, and the site's own classes are reused verbatim (`gc` for the outer
+  card, Tailwind utilities for layout).
+*/
+
+.nbt-tool {
+  /* One place for the editor's monospace voice, so the tree and the fact strip
+     stay consistent with each other and with the site's own font-size setting. */
+  --nbt-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Mono', 'SFMono-Regular', Consolas,
+    'Liberation Mono', monospace;
+  --nbt-radius: 1rem;
+  --nbt-danger: #fca5a5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+/* ── Tool header ─────────────────────────────────────────────────────── */
+
+.nbt-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.nbt-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+}
+
+.nbt-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.625rem;
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 32%, transparent);
+}
+
+.nbt-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.nbt-head-meta {
+  margin-left: auto;
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+}
+
+/* ── File strip (what is open, and its numbers) ───────────────────────── */
+
+.nbt-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.75rem;
+}
+
+.nbt-file {
+  min-width: 0;
+  max-width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.nbt-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.625rem;
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+}
+
+.nbt-sep {
+  opacity: 0.4;
+}
+
+.nbt-pill {
+  border-radius: 999px;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+}
+
+.nbt-pill--clean {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.28);
+}
+
+.nbt-pill--dirty {
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.3);
+}
+
+.nbt-actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  margin-left: auto;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────── */
+
+.nbt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  color: var(--color-muted);
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.nbt-btn:hover:not(:disabled) {
+  color: var(--color-foreground);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  background: var(--color-glass-hover);
+}
+
+.nbt-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.nbt-btn--primary {
+  color: var(--color-accent-foreground);
+  background: var(--color-accent);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.nbt-btn--primary:hover:not(:disabled) {
+  color: var(--color-accent-foreground);
+  background: var(--color-accent);
+  filter: brightness(1.1);
+}
+
+.nbt-btn--danger:hover:not(:disabled) {
+  color: var(--nbt-danger);
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.nbt-select,
+.nbt-input {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.3125rem 0.5rem;
+  outline: none;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.nbt-select:hover {
+  color: var(--color-foreground);
+}
+
+/* Native dropdowns are painted by the OS; pin both colours to the popover. */
+.nbt-select option {
+  background: var(--color-popover);
+  color: var(--color-foreground);
+}
+
+.nbt-tool :focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+  outline-offset: 1px;
+}
+
+.nbt-select:focus-visible,
+.nbt-input:focus-visible {
+  border-color: color-mix(in srgb, var(--color-accent) 65%, transparent);
+}
+
+/* ── Surfaces ────────────────────────────────────────────────────────── */
+
+.nbt-panel {
+  border-radius: var(--nbt-radius);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(var(--glass-blur, 4px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 4px));
+}
+
+.nbt-treewrap {
+  max-height: min(62vh, 34rem);
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+/* ── Dropzone ────────────────────────────────────────────────────────── */
+
+.nbt-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.75rem 1.5rem;
+  text-align: center;
+  border-radius: var(--nbt-radius);
+  border: 1px dashed var(--color-glass-border);
+  /* Calm wash so the empty state reads as designed, and it tracks the accent. */
+  background-image:
+    radial-gradient(
+      circle at 50% 0%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(circle, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    22px 22px;
+  transition: border-color 0.2s;
+}
+
+.nbt-drop[data-dragging='true'] {
+  border-color: color-mix(in srgb, var(--color-accent) 70%, transparent);
+}
+
+.nbt-drop-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+}
+
+.nbt-drop-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.nbt-drop-title {
+  font-family: var(--nbt-mono);
+  font-size: 0.875rem;
+  color: var(--color-foreground);
+}
+
+.nbt-drop-pick {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+.nbt-drop-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.nbt-drop-ext {
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.nbt-drop-hint {
+  max-width: 32rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.nbt-drop-privacy {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.nbt-reject {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--nbt-danger);
+}
+
+/* ── Tree ────────────────────────────────────────────────────────────── */
+
+.nbt-tree {
+  font-family: var(--nbt-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.nbt-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  padding: 0.0625rem 0.25rem;
+  transition: background-color 0.15s;
+}
+
+.nbt-row:hover,
+.nbt-row:focus-within {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+/* Expand/collapse gutter. Same width on leaves so the columns line up. */
+.nbt-row-gutter {
+  display: flex;
+  height: 1.5rem;
+  width: 1rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.nbt-twisty {
+  display: grid;
+  place-items: center;
+  height: 1rem;
+  width: 1rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.nbt-twisty:hover {
+  color: var(--color-foreground);
+}
+
+/* Each variant only sets `color`; the wash and the ring derive from it. */
+.nbt-badge {
+  display: inline-flex;
+  height: 1.35rem;
+  width: 5.25rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 30%, transparent);
+}
+
+.nbt-badge--end {
+  color: var(--color-muted);
+}
+
+.nbt-badge--int {
+  color: #a5b4fc;
+}
+
+.nbt-badge--long {
+  color: #67e8f9;
+}
+
+.nbt-badge--float {
+  color: #c4b5fd;
+}
+
+.nbt-badge--array {
+  color: #5eead4;
+}
+
+.nbt-badge--string {
+  color: #6ee7b7;
+}
+
+.nbt-badge--list {
+  color: #fcd34d;
+}
+
+/* Containers take the site accent, so the tree picks up the user's theme. */
+.nbt-badge--compound {
+  color: var(--color-accent);
+}
+
+.nbt-name {
+  width: 9rem;
+  flex: none;
+  margin-top: 0.0625rem;
+}
+
+.nbt-name-input {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-foreground);
+  font: inherit;
+  padding: 0 0.25rem;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.nbt-name-input:hover {
+  border-color: var(--color-glass-border);
+}
+
+.nbt-name-input:focus {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+  background: var(--color-card);
+}
+
+.nbt-name-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
+
+.nbt-value {
+  flex: 1;
+  min-width: 0;
+}
+
+.nbt-value-summary {
+  display: inline-block;
+  margin-top: 0.0625rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.nbt-value-input {
+  width: 100%;
+  min-width: 8rem;
+  max-width: 30rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-card);
+  color: var(--color-foreground);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  padding: 0.125rem 0.375rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.nbt-value-input:focus {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+}
+
+.nbt-value-input[aria-invalid='true'] {
+  border-color: rgba(248, 113, 113, 0.6);
+}
+
+.nbt-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.0625rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+/* Hidden until hover, but reachable by keyboard through `:focus-within`. */
+.nbt-row:hover .nbt-actions,
+.nbt-row:focus-within .nbt-actions {
+  opacity: 1;
+}
+
+.nbt-mini {
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.3125rem;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.nbt-mini:hover {
+  color: var(--color-foreground);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+.nbt-mini--danger:hover {
+  color: var(--nbt-danger);
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.nbt-mini-select {
+  font-family: var(--nbt-mono);
+}
+
+.nbt-row-error {
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
+  color: var(--nbt-danger);
+}
+
+/* ── Array editor ────────────────────────────────────────────────────── */
+
+.nbt-array {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.nbt-array-side {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.nbt-array-count {
+  font-family: var(--nbt-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+/* ── Messages ────────────────────────────────────────────────────────── */
+
+.nbt-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.625rem 0.75rem;
+}
+
+.nbt-banner-dot {
+  margin-top: 0.3rem;
+  height: 0.375rem;
+  width: 0.375rem;
+  flex: none;
+  border-radius: 999px;
+  background: var(--nbt-danger);
+}
+
+.nbt-banner-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--nbt-danger);
+}
+
+.nbt-banner-body {
+  margin-top: 0.125rem;
+  font-family: var(--nbt-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--nbt-danger) 88%, white);
+  word-break: break-word;
+}
+
+.nbt-warn {
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: #fcd34d;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+
+.nbt-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+}
+
+.nbt-foot-meta {
+  font-family: var(--nbt-mono);
+}
+
+/* ── Scrollbars ──────────────────────────────────────────────────────── */
+
+.nbt-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.nbt-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.nbt-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+/* ── Narrow columns ──────────────────────────────────────────────────── */
+
+/* The tree's fixed badge and name columns eat a lot of width; give some of it
+   back on the phone layout, where the tools nav sits above the content. */
+@media (max-width: 640px) {
+  .nbt-badge {
+    width: 4.5rem;
+  }
+  .nbt-name {
+    width: 6rem;
+  }
+  .nbt-head-meta {
+    margin-left: 0;
+  }
+  .nbt-actions-bar {
+    margin-left: 0;
+  }
+  .nbt-treewrap {
+    max-height: 60vh;
+  }
+}
