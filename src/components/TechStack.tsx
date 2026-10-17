@@ -3,7 +3,65 @@ import GlassCard from '../components/GlassCard';
 import techStack from '../config/tech-stack.json';
 import en from '../i18n/en.json';
 import zh from '../i18n/zh.json';
-import * as simpleIcons from 'simple-icons';
+// Named imports only: `import * as simpleIcons` would bundle all 3000+ brand
+// icons (~5MB). The package is side-effect free ESM, so this tree-shakes cleanly.
+import {
+  siReact,
+  siTypescript,
+  siAstro,
+  siNodedotjs,
+  siPython,
+  siGit,
+  siDocker,
+  siAvaloniaui,
+  siTauri,
+  siDotnet,
+  siHtml5,
+  siJavascript,
+  siCss,
+  siTailwindcss,
+  siSimpleicons,
+  siRider,
+  siAndroidstudio,
+  siObsstudio,
+  siVercel,
+  siCloudflare,
+  siCloudflareworkers,
+  siCloudflarepages,
+  siNpm,
+  siPnpm,
+  siOpencode,
+  siClaudecode,
+} from 'simple-icons';
+
+const simpleIcons: Record<string, { path: string; title: string }> = {
+  siReact,
+  siTypescript,
+  siAstro,
+  siNodedotjs,
+  siPython,
+  siGit,
+  siDocker,
+  siAvaloniaui,
+  siTauri,
+  siDotnet,
+  siHtml5,
+  siJavascript,
+  siCss,
+  siTailwindcss,
+  siSimpleicons,
+  siRider,
+  siAndroidstudio,
+  siObsstudio,
+  siVercel,
+  siCloudflare,
+  siCloudflareworkers,
+  siCloudflarepages,
+  siNpm,
+  siPnpm,
+  siOpencode,
+  siClaudecode,
+};
 
 const messages: Record<string, Record<string, string>> = { en, zh };
 

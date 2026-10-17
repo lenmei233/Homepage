@@ -1,9 +1,11 @@
-import { useState, useEffect, type ReactElement } from 'react';
+import { useState, useEffect, type ReactElement, lazy, Suspense } from 'react';
 import tools from '../config/tools.json';
 import en from '../i18n/en.json';
 import zh from '../i18n/zh.json';
-import DomainPrice from './tools/DomainPrice';
-import NbtEditor from './tools/nbt/NbtEditor';
+// Heavy tools load on demand so the Tools page chunk stays lean
+// until the user actually opens a tool.
+const DomainPrice = lazy(() => import('./tools/DomainPrice'));
+const NbtEditor = lazy(() => import('./tools/nbt/NbtEditor'));
 const messages: Record<string, Record<string, string>> = { en, zh };
 
 const toolIcons: Record<string, ReactElement> = {
@@ -49,7 +51,9 @@ export default function Tools() {
           ))}
         </nav>
         <div className="tools-content">
-          {ActiveComp ? <ActiveComp /> : <p className="text-muted">{t('tools.not-found')}</p>}
+          <Suspense fallback={<p className="text-muted">{t('tools.loading')}</p>}>
+            {ActiveComp ? <ActiveComp /> : <p className="text-muted">{t('tools.not-found')}</p>}
+          </Suspense>
         </div>
       </div>
       <style>{`
