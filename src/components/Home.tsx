@@ -22,10 +22,10 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[76vh] text-center gap-5">
       {site.avatar && (
-        <img src={site.avatar} alt={site.author} className="w-28 h-28 rounded-full object-cover border-2 border-white/15 shadow-lg" />
+        <img src={site.avatar} alt={site.author} className="w-24 h-24 rounded-full object-cover border border-white/20 grayscale" />
       )}
       <div className="space-y-2">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-[-0.05em] bg-gradient-to-r from-foreground via-accent to-purple-400 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-[-0.07em] text-foreground">
           {site.author}
         </h1>
         <p className="text-lg text-muted max-w-md mx-auto">{t('home.subtitle')}</p>
