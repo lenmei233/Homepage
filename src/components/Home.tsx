@@ -19,30 +19,31 @@ export default function Home() {
     return () => document.removeEventListener('lang-changed', handler);
   }, []);
 
+  const links = site.nav.filter(n => n.path !== '/');
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[76vh] text-center gap-5">
-      {site.avatar && (
-        <img src={site.avatar} alt={site.author} className="w-24 h-24 rounded-full object-cover border border-white/20 grayscale" />
-      )}
-      <div className="space-y-2">
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-[-0.07em] text-foreground">
-          {site.author}
-        </h1>
-        <p className="text-lg text-muted max-w-md mx-auto">{t('home.subtitle')}</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-3 mt-4">
-        {site.nav.filter(n => n.path !== '/').map(item =>
-          item.external ? (
-            <a key={item.path} href={item.path} className="gc px-6 py-3.5 text-sm font-medium no-underline hover:-translate-y-1 transition-all duration-300" target="_blank" rel="noopener noreferrer">
-              {t(`nav.${item.label.toLowerCase()}`)}
-            </a>
-          ) : (
-            <Link key={item.path} to={item.path} className="gc px-6 py-3.5 text-sm font-medium no-underline hover:-translate-y-1 transition-all duration-300">
-              {t(`nav.${item.path.replace('/', '')}`)}
-            </Link>
-          )
-        )}
-      </div>
+    <div className="home-shell">
+      <section className="home-hero" aria-labelledby="home-title">
+        <div className="home-kicker"><span className="status-dot" /> {t('home.kicker') || 'AVAILABLE FOR SELECT WORK'}</div>
+        <div className="home-hero-grid">
+          <div>
+            <h1 id="home-title">{site.author}</h1>
+            <p className="home-subtitle">{t('home.subtitle')}</p>
+          </div>
+          {site.avatar && <img src={site.avatar} alt={site.author} className="home-avatar" />}
+        </div>
+      </section>
+      <section className="home-index" aria-label="Site index">
+        <div className="index-label">INDEX <span>({String(links.length).padStart(2, '0')})</span></div>
+        <div className="index-list">
+          {links.map((item, index) => {
+            const label = item.external ? t(`nav.${item.label.toLowerCase()}`) : t(`nav.${item.path.replace('/', '')}`);
+            const content = <><span className="index-number">0{index + 1}</span><span>{label}</span><span className="index-arrow">↗</span></>;
+            return item.external ? <a key={item.path} href={item.path} target="_blank" rel="noopener noreferrer">{content}</a> : <Link key={item.path} to={item.path}>{content}</Link>;
+          })}
+        </div>
+      </section>
+      <div className="home-footer-line"><span>PERSONAL SYSTEM / 2024—25</span><span>SCROLL TO EXPLORE ↓</span></div>
     </div>
   );
 }
